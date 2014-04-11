@@ -2,12 +2,12 @@
 // Generated on 2014-04-11 using generator-gulp-webapp 0.0.6
 
 var gulp = require('gulp');
+var zip = require('gulp-zip');
 var open = require('open');
 var wiredep = require('wiredep').stream;
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
-
 
 // Styles
 gulp.task('styles', function () {
@@ -142,3 +142,13 @@ gulp.task('watch', ['connect', 'serve'], function () {
     // Watch bower files
     gulp.watch('bower.json', ['wiredep']);
 });
+
+//Zip Build File
+gulp.task('zip', function () {
+   var allSrc = ['**/*']; 
+   return gulp.src(allSrc, {cwd: __dirname + "/dist"})
+        .pipe(zip('archive.zip'))
+        .pipe(gulp.dest('compiled'));
+});
+
+
